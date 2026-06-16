@@ -41,7 +41,8 @@ def test_no_install_when_lock_newer_but_hidden_lock_matches(tmp_path: Path, main
     _touch_ink(tmp_path)
     (tmp_path / "package-lock.json").write_text('{"packages":{"node_modules/foo":{"version":"1.0.0"}}}')
     (tmp_path / "node_modules" / ".package-lock.json").write_text(
-        '{"packages":{"node_modules/foo":{"version":"1.0.0","ideallyInert":true}}}'
+        '{"packages":{"node_modules/foo":{"version":"1.0.0",'
+        '"ideallyInert":true}}}'
     )
     os.utime(tmp_path / "package-lock.json", (200, 200))
     os.utime(tmp_path / "node_modules" / ".package-lock.json", (100, 100))
