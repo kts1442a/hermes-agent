@@ -50,10 +50,18 @@ The center of the app. You get:
 
 The bar along the bottom of the chat shows live session state and exposes quick controls without opening Settings:
 
-- **Inline model picker** — switch the model for the active session straight from the status bar.
 - **Per-session YOLO toggle** — flip YOLO on or off for just this session (matching the TUI). YOLO bypasses the dangerous-command approval prompts, so know what you're turning off — see [Security → YOLO Mode](./security.md#yolo-mode).
 
 Chatting against a Hermes instance on another machine instead of the bundled local backend? See [Connecting to a remote backend](#connecting-to-a-remote-backend) below — and for the full picture of how the remote-hosted dashboard connection works (the auth gate, the `/api/ws` chat socket, and WebSocket close-code triage), see [Web Dashboard → Connecting Hermes Desktop to a remote backend](./features/web-dashboard.md#connecting-hermes-desktop-to-a-remote-backend).
+
+#### Choosing a model
+
+The model picker lives in the **composer**, just left of the microphone. Click it to switch the model, reasoning effort, and fast mode from one dropdown.
+
+- **The composer picker is per-session.** Switching models there changes only the **current chat** — your profile's default is untouched, so the next new chat starts on the default again. (This matches the CLI/TUI `/model`, which is also session-only by default.)
+- **Set the default in Settings → Model.** That "main" model is your **per-profile global default** — it's what new chats, crons, subagents, and auxiliary tasks start from. Each [profile](#sessions--profiles) keeps its own default.
+- **Want a model switch to stick globally?** Open the full picker dialog and tick **Persist globally (otherwise this session only)** — it writes the same per-profile default as Settings → Model. (When there's no active session yet, selections persist globally automatically.)
+- **Per-model effort/fast presets.** Each model remembers its own reasoning effort and fast-mode choice in the desktop app, re-applied to the session whenever you pick that model. These presets are a desktop convenience and don't change crons or subagents.
 
 ### File browser
 
